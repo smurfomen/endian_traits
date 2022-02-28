@@ -185,7 +185,7 @@ struct be {
     { }
 
     explicit operator value_t() const {
-        return __from_le<value_t>(value);
+        return __from_be<value_t>(value);
     }
 
     be & operator=(value_t rhs) {
@@ -214,4 +214,22 @@ using le16 = endian<le<uint16_t>>;
 using be64 = endian<be<uint64_t>>;
 using be32 = endian<be<uint32_t>>;
 using be16 = endian<be<uint16_t>>;
+
+
+using le_u64 = endian<le<uint64_t>>;
+using le_u32 = endian<le<uint32_t>>;
+using le_u16 = endian<le<uint16_t>>;
+
+using be_u64 = endian<be<uint64_t>>;
+using be_u32 = endian<be<uint32_t>>;
+using be_u16 = endian<be<uint16_t>>;
+
+using le_i64 = endian<le<int64_t>>;
+using le_i32 = endian<le<int32_t>>;
+using le_i16 = endian<le<int16_t>>;
+
+using be_i64 = endian<be<int64_t>>;
+using be_i32 = endian<be<int32_t>>;
+using be_i16 = endian<be<int16_t>>;
+
 #endif
