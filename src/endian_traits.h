@@ -70,41 +70,33 @@ template <typename T> inline T __from_le(const T src) {
 
 
 template<typename T>
-struct __endian_traits {
-    static constexpr bool valid = false;
-};
+struct __endian_traits : std::false_type
+{ };
 
-template<> struct __endian_traits<uint16_t> {
-    static constexpr bool valid = true;
-};
+template<> struct __endian_traits<uint16_t> : std::true_type
+{ };
 
-template<> struct __endian_traits<uint32_t> {
-    static constexpr bool valid = true;
-};
+template<> struct __endian_traits<uint32_t> : std::true_type
+{ };
 
-template<> struct __endian_traits<uint64_t> {
-    static constexpr bool valid = true;
-};
+template<> struct __endian_traits<uint64_t> : std::true_type
+{ };
 
-template<> struct __endian_traits<int16_t> {
-    static constexpr bool valid = true;
-};
+template<> struct __endian_traits<int16_t> : std::true_type
+{ };
 
-template<> struct __endian_traits<int32_t> {
-    static constexpr bool valid = true;
-};
+template<> struct __endian_traits<int32_t> : std::true_type
+{ };
 
-template<> struct __endian_traits<int64_t> {
-    static constexpr bool valid = true;
-};
+template<> struct __endian_traits<int64_t> : std::true_type
+{ };
 
 
 
 template<typename T> struct le;
-
 template<typename T> struct be;
 
-template<typename T, class = typename std::enable_if<__endian_traits<typename T::value_t>::valid, bool>::type>
+template<typename T, class = typename std::enable_if<__endian_traits<typename T::value_t>::value, bool>::type>
 struct endian {
     using value_t = typename T::value_t;
     endian(value_t v) noexcept
@@ -233,3 +225,4 @@ using be_i32 = endian<be<int32_t>>;
 using be_i16 = endian<be<int16_t>>;
 
 #endif
+
